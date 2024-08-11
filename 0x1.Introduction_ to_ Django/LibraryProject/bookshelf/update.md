@@ -1,3 +1,3 @@
-new_book = "New Meditations"
+new_book = "Nineteen Eighty-Four"
 
 new_book.save()
