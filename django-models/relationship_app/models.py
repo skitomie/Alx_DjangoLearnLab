@@ -37,10 +37,18 @@ class UserProfile(models.Model):
     ]
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
-
+    Admin = models.CharField(max_length=10),
+    Librarian = models.CharField(max_length=10),
+    Member = models.CharField(max_length=10)
+  
     def __str__(self):
-        return f'{self.user.username} - {self.role}'
+        return f'{self.user.username} - {self.Admin}'
+    
+    def __str__(self):
+        return f'{self.user.username} - {self.Librarian}'
+    
+    def __str__(self):
+        return f'{self.user.username} - {self.Member}'
     
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
