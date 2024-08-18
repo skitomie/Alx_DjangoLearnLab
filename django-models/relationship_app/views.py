@@ -4,10 +4,9 @@ from .models import Book
 from django.views.generic import TemplateView
 
 
-
 def book_list(request):
-    books = Book.objects.all()
-    context = {'book_list': books}
+    book = Book.objects.all()
+    context = {'book_list': book}
 
     return render(request, 'books/list_books.html', context)
 
