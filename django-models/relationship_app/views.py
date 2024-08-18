@@ -23,4 +23,8 @@ class LibraryDetailView(DetailView):
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+    template_name = 'registration/register.html'
+
+def register(request):
+    form = UserCreationForm()  # Use UserCreationForm() if you don't have a custom form
+    return render(request, 'relationship_app/register.html', {'form': form})
