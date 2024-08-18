@@ -28,6 +28,7 @@ class Librarian(models.Model):
 
     def __str__(self):
         return self.name
+    
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
