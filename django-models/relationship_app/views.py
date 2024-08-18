@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Book
-from django.views.generic import TemplateView
+from django.views.generic import DetailView
+from .models import Library
 
 
 def book_list(request):
@@ -10,6 +10,7 @@ def book_list(request):
 
     return render(request, 'books/list_books.html', context)
 
-class DetailView(TemplateView):
-    model = Book
-    template_name = 'books/library_details.html'
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'library_details.html'
+    context_object_name = 'library'
