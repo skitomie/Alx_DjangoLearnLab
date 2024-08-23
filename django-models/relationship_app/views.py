@@ -33,3 +33,5 @@ def register(request):
     form = UserCreationForm()  # Use UserCreationForm() if you don't have a custom form
     return render(request, 'relationship_app/register.html', {'form': form})
 
+user = User.objects.create_user(username='john', password='password')
+user_profile = UserProfile.objects.create(user=user, role='ROLE_CHOICES')
