@@ -8,7 +8,7 @@ def Librarian(user):
 
 @user_passes_test(Librarian)
 def librarian_view(request):
-    return render(request, 'relationship_app/librarian_view.html')
+    return render(request, 'relationship_app/librarian_view.html', {})
 
 user = User.objects.create_user(username='john', password='password')
 user_profile = UserProfile.objects.create(user=user, role='Librarian')
