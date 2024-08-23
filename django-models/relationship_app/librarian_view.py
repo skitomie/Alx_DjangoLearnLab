@@ -6,5 +6,6 @@ from .models import UserProfile
 def Librarian(user):
     return user.userprofile.role == 'Librarian'
 
-def Librarian(user):
-    return user.userprofile.role == 'Librarian'
+@user_passes_test(Librarian)
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
