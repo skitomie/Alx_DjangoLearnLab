@@ -10,3 +10,5 @@ def Admin(user):
 def admin_view(request):
     return render(request, 'relationship_app/admin_view.html')
 
+user = User.objects.create_user(username='john', password='password')
+user_profile = UserProfile.objects.create(user=user, role='Admin')

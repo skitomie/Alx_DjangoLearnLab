@@ -9,3 +9,6 @@ def Member(user):
 @user_passes_test(Member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+user = User.objects.create_user(username='john', password='password')
+user_profile = UserProfile.objects.create(user=user, role='Member')

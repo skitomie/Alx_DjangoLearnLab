@@ -33,23 +33,3 @@ def register(request):
     form = UserCreationForm()  # Use UserCreationForm() if you don't have a custom form
     return render(request, 'relationship_app/register.html', {'form': form})
 
-def admin_view(user):
-    return user.userprofile.role == 'Admin'
-
-@user_passes_test(admin_view)
-def admin_view(request):
-    return render(request, 'relationship_app/admin_view.html')
-
-def librarian_view(user):
-    return user.userprofile.role == 'Librarian'
-
-@user_passes_test(librarian_view)
-def librarian_view(request):
-    return render(request, 'relationship_app/librarian_view.html')
-
-def member_view(user):
-    return user.userprofile.role == 'Member'
-
-@user_passes_test(member_view)
-def member_view(request):
-    return render(request, 'relationship_app/member_view.html')
