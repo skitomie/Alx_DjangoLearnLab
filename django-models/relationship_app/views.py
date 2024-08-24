@@ -36,23 +36,23 @@ def register(request):
 #user = User.objects.create_user(username='john', password='password')
 #user_profile = UserProfile.objects.create(user=user, role='ROLE_CHOICES')
 
-def is_admin(user):
+def Admin(user):
         return user.userprofile.role == 'Admin'
 
-@user_passes_test(is_admin)
-def admin_view(request):
-    return render(request, 'admin_view.html')
+@user_passes_test(Admin)
+def Admin(request):
+    return render(request, 'Admin.html')
 
-def is_librarian(user):
+def Librarian(user):
     return user.userprofile.role == 'Librarian'
 
-@user_passes_test(is_librarian)
-def librarian_view(request):
-    return render(request, 'librarian_view.html')
+@user_passes_test(Librarian)
+def Librarian(request):
+    return render(request, 'Librarian.html')
 
-def is_member(user):
+def Member(user):
     return user.userprofile.role == 'Member'
 
-@user_passes_test(is_member)
-def member_view(request):
-    return render(request, 'member_view.html')
+@user_passes_test(Member)
+def Member(request):
+    return render(request, 'Member.html')
