@@ -13,6 +13,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from .models import UserProfile
+from .models import Admin
+from .models import Librarian
+from .models import Member
 
 
 def list_books(request):
@@ -40,23 +43,25 @@ def register(request):
 """
 def Admin(user):
         return user.userprofile.role == 'Admin'
+"""
 
 @user_passes_test(Admin)
 def Admin(request):
     return render(request, 'Admin.html')
 
+"""
 def Librarian(user):
     return user.userprofile.role == 'Librarian'
-
+"""
 @user_passes_test(Librarian)
 def Librarian(request):
     return render(request, 'Librarian.html')
 
+"""
 def Member(user):
     return user.userprofile.role == 'Member'
+"""
 
 @user_passes_test(Member)
 def Member(request):
     return render(request, 'Member.html')
-
-    """
