@@ -29,6 +29,7 @@ class Librarian(models.Model):
     def __str__(self):
         return self.name
     
+    
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
@@ -42,6 +43,11 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.username} - {self.role}'
     
+
+#user = User.objects.create_user(username='john', password='password')
+#user_profile = UserProfile.objects.create(user=user, role='Librarian')
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
