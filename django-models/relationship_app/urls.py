@@ -18,6 +18,6 @@ urlpatterns = [
     path('librarian/', Librarian, name='Librarian'),
     path('member/', Member, name='Member'),
     path('add_book/', views.add_book, name='add_book'),
-    path('book/<int:pk>/edit/', views.edit_book, name='edit_book'),
-    path('book/<int:pk>/delete/', views.delete_book, name='delete_book'),
+    path('edit_book/<int:pk>/edit/', views.edit_book, name='edit_book'),
+    path('delete_book/<int:pk>/delete/', views.delete_book, name='delete_book'),
 ]
