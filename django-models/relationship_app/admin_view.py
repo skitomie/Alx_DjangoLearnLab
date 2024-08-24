@@ -1,9 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
-#from .models import UserProfile
-
-def Admin(user):
-        return user.userprofile.role == 'Admin'
+from .models import Admin
 
 @user_passes_test(Admin)
 def Admin(request):

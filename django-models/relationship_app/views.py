@@ -1,3 +1,4 @@
+from admin_view import Admin
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from .models import Book
@@ -12,6 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from .models import UserProfile
+
 
 def list_books(request):
     book = Book.objects.all()
