@@ -35,7 +35,7 @@ def register(request):
 
 #user = User.objects.create_user(username='john', password='password')
 #user_profile = UserProfile.objects.create(user=user, role='ROLE_CHOICES')
-
+"""
 def Admin(user):
         return user.userprofile.role == 'Admin'
 
@@ -56,3 +56,5 @@ def Member(user):
 @user_passes_test(Member)
 def Member(request):
     return render(request, 'Member.html')
+
+    """
