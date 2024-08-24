@@ -43,19 +43,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.username} - {self.role}'
     
-def Admin(user):
-        return user.userprofile.role == 'Admin'
-
-
-def Librarian(user):
-    return user.userprofile.role == 'Librarian'
-
-def Member(user):
-    return user.userprofile.role == 'Member'
-
-#user = User.objects.create_user(username='john', password='password')
-#user_profile = UserProfile.objects.create(user=user, role='Librarian')
-
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -65,3 +52,17 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
+
+
+
+def Admin(user):
+        return user.userprofile.role == 'Admin'
+
+def Librarian(user):
+    return user.userprofile.role == 'Librarian'
+
+def Member(user):
+    return user.userprofile.role == 'Member'
+
+#user = User.objects.create_user(username='john', password='password')
+#user_profile = UserProfile.objects.create(user=user, role='Librarian')
