@@ -5,6 +5,7 @@ from .models import SomeModel
 from django import forms
 from django.http import HttpResponse
 from django import User
+from . forms import ExampleForm
 
 
 @permission_required('bool_list.can_view', raise_exception=True)
@@ -25,11 +26,6 @@ def edit_somemodel(request, pk):
 
 # Secure way using Django ORM
 users = User.objects.filter(username=username)
-
-
-class MyForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
 
 def my_view(request):
     response = HttpResponse("Hello, world!")
