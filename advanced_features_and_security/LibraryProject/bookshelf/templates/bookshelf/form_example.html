@@ -1,4 +1,7 @@
+
+
 <form method="post">
     {% csrf_token %}
-    <!-- form fields here -->
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
 </form>
