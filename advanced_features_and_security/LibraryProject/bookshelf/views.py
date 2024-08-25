@@ -1,3 +1,4 @@
+from . forms import ExampleForm
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -5,7 +6,7 @@ from .models import SomeModel
 from django import forms
 from django.http import HttpResponse
 from django import User
-from . forms import ExampleForm
+
 
 
 @permission_required('bool_list.can_view', raise_exception=True)
