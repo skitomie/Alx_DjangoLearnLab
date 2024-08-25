@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import SomeModel
+from django import forms
+from django.http import HttpResponse
+from django import User
+
 
 @permission_required('bool_list.can_view', raise_exception=True)
 def view_somemodel(request, pk):
@@ -15,3 +19,19 @@ def edit_somemodel(request, pk):
         # Handle form submission
         pass
     return render(request, 'bookshelf/somemodel_edit.html', {'object': obj})
+
+# Insecure way (prone to SQL injection)
+#query = "SELECT * FROM users WHERE username = '%s'" % username
+
+# Secure way using Django ORM
+users = User.objects.filter(username=username)
+
+
+class MyForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+
+def my_view(request):
+    response = HttpResponse("Hello, world!")
+    response['Content-Security-Policy'] = "default-src 'self'; script-src 'self' https://trusted.cdn.com"
+    return response
