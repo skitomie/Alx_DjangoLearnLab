@@ -38,3 +38,20 @@ class CustomUser(AbstractUser):
 
 class SomeModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+
+class SomeModel(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    class Meta:
+        permissions = [
+            ('can_view', 'Can View SomeModel'),
+            ('can_create', 'Can Create SomeModel'),
+            ('can_edit', 'Can Edit SomeModel'),
+            ('can_delete', 'Can Delete SomeModel'),
+        ]
+
+    def __str__(self):
+        return self.name
