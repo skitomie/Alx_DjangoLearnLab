@@ -1,4 +1,4 @@
-from django.urls import path
+from api.urls import path
 from .views import BookList
 
 urlpatterns = [
