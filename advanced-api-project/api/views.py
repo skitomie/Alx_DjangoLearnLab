@@ -5,6 +5,7 @@ from .serializers import BookSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from django_filters import rest_framework
 
 # BookListView allows any user to retrieve a list of all books.
 # No authentication is required for this view.
