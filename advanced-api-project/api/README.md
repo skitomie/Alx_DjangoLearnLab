@@ -24,3 +24,14 @@ The Book API supports filtering, searching, and ordering via query parameters.
 ### Ordering
 - Order by `title` or `publication_year`:  
   Example: `/api/books/?ordering=publication_year`
+
+  ## Testing the API
+
+We use Django's built-in testing framework to ensure the API endpoints behave correctly.
+
+### Running Tests
+
+To run the test suite, use the following command:
+
+```bash
+python manage.py test api
