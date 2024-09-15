@@ -15,7 +15,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
 from .forms import CommentForm
 from django.db.models import Q
-from .models import Post, Tag
+from .models import Post
+#from django.shortcuts import render
+from .models import Post
 
 
 
@@ -117,14 +119,24 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+def posts_by_tag(request, tag_name):
+    posts = Post.objects.filter(tags__name__in=[tag_name])
+    return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag_name})
+
+
 def search(request):
     query = request.GET.get('q')
     posts = Post.objects.filter(
         Q(title__icontains=query) | Q(content__icontains=query) | Q(tags__name__icontains=query)
     ).distinct()
     return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
-
+"""
 def posts_by_tag(request, tag_name):
     tag = Tag.objects.get(name=tag_name)
     posts = tag.posts.all()
     return render(request, 'blog/post_list.html', {'posts': posts, 'tag': tag})
+"""
