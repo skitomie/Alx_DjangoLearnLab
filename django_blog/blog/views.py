@@ -33,17 +33,17 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-class PostListView(ListView):
+class ListView(ListView):
     model = Post
     template_name = 'post_list.html'
     context_object_name = 'posts'
     ordering = ['-published_date']
 
-class PostDetailView(DetailView):
+class DetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class CreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'post_form.html'
@@ -52,7 +52,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'post_form.html'
@@ -61,7 +61,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         return self.request.user == post.author
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'post_confirm_delete.html'
     success_url = reverse_lazy('post-list')
