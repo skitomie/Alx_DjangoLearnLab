@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Post
 from .models import Comment
+from .models import Post, Tag
+
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -24,3 +26,19 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={'rows': 3}),
         }
+
+
+class PostForm(forms.ModelForm):
+    tags = forms.CharField(max_length=200, required=False, help_text="Add tags separated by commas")
+
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']
+
+    def save(self, *args, **kwargs):
+        post = super().save(*args, **kwargs)
+        tag_names = self.cleaned_data['tags'].split(',')
+        for tag_name in tag_names:
+            tag, created = Tag.objects.get_or_create(name=tag_name.strip())
+            post.tags.add(tag)
+        return post
