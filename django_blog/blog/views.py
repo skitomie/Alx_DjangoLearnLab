@@ -123,7 +123,7 @@ def post_list(request):
     posts = Post.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts})
 
-def posts_by_tag(request, tag_name):
+def PostByTagListView(request, tag_name):
     posts = Post.objects.filter(tags__name__in=[tag_name])
     return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag_name})
 
