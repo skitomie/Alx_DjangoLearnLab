@@ -7,6 +7,7 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     # Define serializer fields, including CharField for username and email
+    serializers.CharField()
     username = serializers.CharField(max_length=100)
     email = serializers.CharField(max_length=100)
     password = serializers.CharField(write_only=True)
