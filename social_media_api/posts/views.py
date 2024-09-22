@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Post, Like
 from notifications.models import Notification
-from django.shortcuts import get_object_or_404
+from django.shortcuts import generic.get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -91,6 +91,7 @@ class UnlikePostView(APIView):
             return Response({"detail": "Post unliked successfully"}, status=status.HTTP_200_OK)
         return Response({"detail": "You haven't liked this post"}, status=status.HTTP_400_BAD_REQUEST)
 
+        generics.get_object_or_404(Post, pk=pk)
 """
 
 
@@ -123,7 +124,7 @@ class UnlikePostView(APIView):
 
     def post(self, request, pk):
         # Use get_object_or_404 to fetch the post or return a 404 error if not found
-        post = get_object_or_404(Post, pk=pk)
+        post = generic.get_object_or_404(Post, pk=pk)
 
         # Attempt to find the like record
         like = Like.objects.filter(user=request.user, post=post).first()
