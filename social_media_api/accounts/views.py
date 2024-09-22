@@ -11,6 +11,12 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from .models import CustomUser
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+from .models import CustomUser
+from .serializers import UserSerializer
 
 class RegisterView(APIView):
     def post(self, request):
@@ -50,6 +56,41 @@ class FollowUserView(APIView):
         return Response({'detail': 'You cannot follow yourself'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UnfollowUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        user_to_unfollow = get_object_or_404(CustomUser, id=user_id)
+        if request.user != user_to_unfollow:
+            request.user.following.remove(user_to_unfollow)
+            return Response({'detail': f'You have unfollowed {user_to_unfollow.username}'}, status=status.HTTP_200_OK)
+        return Response({'detail': 'You cannot unfollow yourself'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# List all users - Example of using generics.GenericAPIView
+class UserListView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        users = CustomUser.objects.all()
+        serializer = self.get_serializer(users, many=True)
+        return Response(serializer.data)
+
+# Follow another user
+class FollowUserView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        user_to_follow = get_object_or_404(CustomUser, id=user_id)
+        if request.user != user_to_follow:
+            request.user.following.add(user_to_follow)
+            return Response({'detail': f'You are now following {user_to_follow.username}'}, status=status.HTTP_200_OK)
+        return Response({'detail': 'You cannot follow yourself'}, status=status.HTTP_400_BAD_REQUEST)
+
+# Unfollow a user
+class UnfollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, user_id):
