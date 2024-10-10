@@ -15,7 +15,7 @@ class PostListView(generics.ListAPIView):
     
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category', 'author']
-    search_fields = ['title', 'content', 'tags__name', 'author__username']
+    search_fields = ['title', 'content', 'tags', 'author']
     ordering_fields = ['published_date', 'category']
 
 # View for creating a new post
